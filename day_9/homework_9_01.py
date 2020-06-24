@@ -1,5 +1,5 @@
-# 1. Создать пять классов описывающие реальные объекты. Каждый класс должен содержать минимум три приватных атрибута,
-# конструктор, геттеры и сеттеры для каждого атрибута, два метода.
+# 1. РЎРѕР·РґР°С‚СЊ РїСЏС‚СЊ РєР»Р°СЃСЃРѕРІ РѕРїРёСЃС‹РІР°СЋС‰РёРµ СЂРµР°Р»СЊРЅС‹Рµ РѕР±СЉРµРєС‚С‹. РљР°Р¶РґС‹Р№ РєР»Р°СЃСЃ РґРѕР»Р¶РµРЅ СЃРѕРґРµСЂР¶Р°С‚СЊ РјРёРЅРёРјСѓРј С‚СЂРё РїСЂРёРІР°С‚РЅС‹С… Р°С‚СЂРёР±СѓС‚Р°,
+# РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ, РіРµС‚С‚РµСЂС‹ Рё СЃРµС‚С‚РµСЂС‹ РґР»СЏ РєР°Р¶РґРѕРіРѕ Р°С‚СЂРёР±СѓС‚Р°, РґРІР° РјРµС‚РѕРґР°.
 class Human:
     def __init__(self, name, age, gender):
         self._name = name
@@ -47,7 +47,7 @@ class Planet:
         self._name = name
         self._radius = radius
         self._ispopulation = False
-        self._population = None
+        self._population = 0
 
     name = property()
     radius = property()
@@ -87,7 +87,7 @@ class Planet:
         self._ispopulation = value
 
     def raise_population(self, quantity=None):
-        """Увеличивает популяцию на quantity, по умолчанию в два раза больше"""
+        """РЈРІРµР»РёС‡РёРІР°РµС‚ РїРѕРїСѓР»СЏС†РёСЋ РЅР° quantity, РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РІ РґРІР° СЂР°Р·Р° Р±РѕР»СЊС€Рµ"""
 
         if quantity:
             self._population += quantity
@@ -136,6 +136,69 @@ class Telephone:
         print(f'Number {self._number} is calling...')
 
     def charge_down(self):
-        if self._charge == 0:
-            print('Пора зарядить телефон')
         self._charge -= 10
+        if self._charge == 0:
+            print('РџРѕСЂР° Р·Р°СЂСЏРґРёС‚СЊ С‚РµР»РµС„РѕРЅ')
+
+
+class Car:
+    def __init__(self, brand, seats, fuel_rest):
+        self._brand = brand
+        self._seats = seats
+        self._fuel_rest = fuel_rest
+
+    brand = property()
+    seats = property()
+    fuel_rest = property()
+
+    @brand.getter
+    def brand(self):
+        return self._brand
+
+    @brand.setter
+    def brand(self, value):
+        self._brand = value
+
+    @seats.getter
+    def seats(self):
+        return self._seats
+
+    @seats.setter
+    def seats(self, value):
+        self._seats = value
+
+    @fuel_rest.getter
+    def fuel_rest(self):
+        return self._fuel_rest
+
+    @fuel_rest.setter
+    def fuel_rest(self, value):
+        self._fuel_rest = value
+
+    @classmethod
+    def start_trip(cls):
+        print('РџРѕРµС…Р°Р»Рё!')
+
+    def fuel_flow(self):
+        self._fuel_rest -= 10
+        if self._fuel_rest == 20:
+            print('РџРѕСЂР° Р·Р°РїСЂР°РІРёС‚СЊСЃСЏ')
+
+
+masha = Human('Masha', 19, 'female')
+masha.say_hello()
+masha.presentation()
+
+earth = Planet('Earth', 6_371_302)
+earth.create_live()
+earth.raise_population(7_000_000_000)
+print(earth._population)
+
+tel = Telephone('Iphone', 100, '+375297873131')
+tel.calling()
+tel._charge = 10
+tel.charge_down()
+
+car = Car('Bugatti', 2, 30)
+car.start_trip()
+car.fuel_flow()
